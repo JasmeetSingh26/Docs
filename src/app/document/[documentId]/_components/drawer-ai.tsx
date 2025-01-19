@@ -54,9 +54,7 @@ const DrawerAI = ({ description }: DrawerProps) => {
 
       {open && (
         <div className="fixed top-0 right-0 h-full w-96 bg-white shadow-lg rounded-l-lg flex flex-col">
-          <h2 className="text-lg font-bold mb-4 px-4 pt-4">
-            🧙‍♂️ Wizard's Advice
-          </h2>
+          <h2 className="text-lg font-bold mb-4 px-4 pt-4">🧙‍♂️ Wizard Advice</h2>
           {isLoading ? (
             <p className="text-center flex-grow flex items-center justify-center">
               Loading...
