@@ -7,7 +7,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation"; // Use this for navigation in Next.js 13
 import { useToast } from "@/components/ui/use-toast";
 import DrawerAI from "./drawer-ai";
-import { revalidatePath } from "next/cache";
 
 interface DocumentProps {
   id: string;
@@ -22,17 +21,18 @@ const EditorBlock = ({ document }: { document?: DocumentProps | null }) => {
   const { toast } = useToast();
   const router = useRouter(); // Initialize router for client-side navigation
 
-  if (!document) {
-    router.push("/"); // Redirect to home page if no document
-    return null; // Don't render the component
-  }
-
   const [title, setTitle] = useState(document?.title || "");
   const [description, setDescription] = useState(document?.description || "");
   const [errors, setErrors] = useState<{
     title?: string;
     description?: string;
   }>({});
+
+  // Redirect logic moved AFTER the hooks
+  if (!document) {
+    router.push("/"); // Redirect to home page if no document
+    return null; // Don't render the component
+  }
 
   async function onSubmit(event: React.FormEvent) {
     event.preventDefault();
